@@ -4,12 +4,12 @@
   roles:
     - dependencies
 
-- hosts: webserver
+- hosts: databases
   become: yes
   roles:
-    - webserver
+    - databases
 
-- hosts: database
+- hosts: webservers
   become: yes
   roles:
-    - database
+    - webservers

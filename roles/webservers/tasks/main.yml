@@ -1,5 +1,4 @@
 ---
-
 # file: roles/webserver/tasks/main.yml
 
 - name: Instalando client Mysql.
@@ -11,7 +10,7 @@
   tags: apache
 
 - mame: Añadiendo repositorio PHP
-  apt_repository: repo='ppa:ondrej/php'
+  apt_repository: repo="ppa:ondrej/php"
   tags: php
 
 - name: Actualizando sistema
@@ -52,7 +51,7 @@
   tags: joomla
 
 - name: Importando templete configuration.php a nodo
-  template: src="~/playbooks/roles/webserver/files/configuration.php" dest="/tmp" owner=www-data group=www-data mode=0775
+  template: src="configuration.php" dest="/tmp" owner=www-data group=www-data mode=0775
   tags: joomla
 
 - name: Insertando templete configuration.php a Joomla

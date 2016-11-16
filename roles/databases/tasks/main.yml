@@ -1,5 +1,4 @@
 ---
-
 # file: roles/database/tasks/main.yml
 
 - name: Instalando Mysql
@@ -23,7 +22,7 @@
   tags: mysql
 
 - name: Importando templete joomla.
-  template: src="~/playbooks/roles/database/files/joomla.sql" dest="/tmp" owner=root group=root mode=0775
+  template: src="joomla.sql" dest="/tmp" owner=root group=root mode=0775
   tags: mysql
 
 - name: Creando usuario Joomla

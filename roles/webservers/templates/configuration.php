@@ -12,7 +12,7 @@ class JConfig {
 	public $debug = '0';
 	public $debug_lang = '0';
 	public $dbtype = 'mysqli';
-	public $host = 'localhost';
+	public $host = '192.168.119.135';
 	public $user = 'joomla';
 	public $password = '1t1l2016.';
 	public $db = 'joomla';
@@ -31,7 +31,7 @@ class JConfig {
 	public $offset = 'UTC';
 	public $mailonline = '1';
 	public $mailer = 'mail';
-	public $mailfrom = 'daniel@hotmail.com';
+	public $mailfrom = 'alvaronavarro@outlook.com';
 	public $fromname = 'Alvaro Navarro Acosta | Ansible';
 	public $sendmail = '/usr/sbin/sendmail';
 	public $smtpauth = '0';
