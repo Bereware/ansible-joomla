@@ -48,7 +48,7 @@
   tags: joomla
 
 - name: Eliminar direcotrio Instalacion Joomla
-  file: file: path="/var/www/html/joomla/installation" state=absent
+  file: path="/var/www/html/joomla/installation" state=absent
   tags: joomla
 
 - name: Importando templete configuration.php a nodo
