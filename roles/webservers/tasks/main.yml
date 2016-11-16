@@ -9,7 +9,7 @@
   apt: name=apache2 update_cache=yes state=latest
   tags: apache
 
-- mame: Añadiendo repositorio PHP
+- mame: Add repositorio PHP
   apt_repository: repo="ppa:ondrej/php"
   tags: php
 
