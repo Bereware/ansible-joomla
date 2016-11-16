@@ -9,8 +9,8 @@
   apt: name=apache2 update_cache=yes state=latest
   tags: apache
 
-- mame: Add repositorio PHP
-  apt_repository: repo="ppa:ondrej/php"
+- name: Add repositorio PHP
+  apt_repository: repo='ppa:ondrej/php'
   tags: php
 
 - name: Actualizando sistema
@@ -55,6 +55,6 @@
   tags: joomla
 
 - name: Insertando templete configuration.php a Joomla
-  copy: src="/tmp/configuration.php" dest="/var/www/html/joomla"
+  copy: remote_src=TRUE src="/tmp/configuration.php" dest="/var/www/html/joomla"
   notify: Reiniciar Apache2
   tags: joomla
