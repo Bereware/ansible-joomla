@@ -1,0 +1,61 @@
+---
+
+# file: roles/webserver/tasks/main.yml
+
+- name: Instalando client Mysql.
+  apt: name=mysql-client update_cache=yes state=latest
+  tags: mysql
+
+- name: Instalando Apache2
+  apt: name=apache2 update_cache=yes state=latest
+  tags: apache
+
+- mame: Añadiendo repositorio PHP
+  apt_repository: repo='ppa:ondrej/php'
+  tags: php
+
+- name: Actualizando sistema
+  apt: update_cache=yes
+
+- name: Instalando php
+  apt: name={{ item }} state=latest
+  with_items:
+    - php5.6
+    - php5.6-xml
+    - php5.6-mbstring
+    - php5.6-mysql
+    - php5.6-mcrypt
+  tags: php
+
+- name: Descargando Joomla
+  get_url: url="https://downloads.joomla.org/cms/joomla3/3-6-4/joomla_3-6-4-stable-full_package-zip?format=zip" dest="/tmp"
+  tags: joomla
+
+- name: Creando directorio Joomla
+  file: path=/var/www/html/joomla state=directory owner=www-data group=www-data mode=0775
+  tags: joomla
+
+- name: Copiando Joomla a servidor Apache
+  copy: remote_src=TRUE src="/tmp/Joomla_3.6.4-Stable-Full_Package.zip" dest="/var/www/html/joomla/Joomla.zip"
+  tags: joomla
+
+- name: Limpiando carpeta /tmp
+  file: path="/tmp/Joomla_3.6.4-Stable-Full_Package.zip" state=absent
+  tags: joomla
+
+- name: Descomprimiendo Joomla
+  unarchive: copy=no src="/var/www/html/joomla/Joomla.zip" dest="/var/www/html/joomla/" owner=www-data group=www-data mode=0775
+  tags: joomla
+
+- name: Eliminar direcotrio Instalacion Joomla
+  file: file: path="/var/www/html/joomla/installation" state=absent
+  tags: joomla
+
+- name: Importando templete configuration.php a nodo
+  template: src="~/playbooks/roles/webserver/files/configuration.php" dest="/tmp" owner=www-data group=www-data mode=0775
+  tags: joomla
+
+- name: Insertando templete configuration.php a Joomla
+  copy: src="/tmp/configuration.php" dest="/var/www/html/joomla"
+  notify: Reiniciar Apache2
+  tags: joomla

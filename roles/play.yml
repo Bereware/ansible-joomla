@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - dependencies
+
+- hosts: webserver
+  become: yes
+  roles:
+    - webserver
+
+- hosts: database
+  become: yes
+  roles:
+    - database
