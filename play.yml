@@ -1,15 +1,14 @@
 ---
-- hosts: all
-  become: yes
-  roles:
-    - dependencies
+# main playbook ansible-joomla
 
 - hosts: databases
   become: yes
   roles:
+    - dependencies
     - databases
 
 - hosts: webservers
   become: yes
   roles:
+    - dependencies
     - webservers
