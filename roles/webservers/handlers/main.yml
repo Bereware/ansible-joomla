@@ -1,5 +1,5 @@
 ---
 # file: roles/webserver/handlers/main.yml
 
-- name: Reiniciar Apache2
+- name: Restart Apache2
   service: name=apache2 state=restarted

@@ -30,7 +30,7 @@
     - php5.6-mbstring
     - php5.6-mysql
     - php5.6-mcrypt
-  notify: Reiniciar Apache2
+  notify: Restart Apache2
   tags: php
 
 - name: Descargando Joomla
@@ -63,6 +63,7 @@
 
 - name: Insertando templete configuration.php a Joomla
   copy: remote_src=TRUE src="/tmp/configuration.php" dest="{{ joomla_install_dir }}"
+  notify: Restart Apache2
   tags: joomla
 
 - name: Limpiando carpeta /tmp
@@ -70,15 +71,15 @@
   tags: joomla
 
 - name: Template VHOST
-  template: src={{ joomla_dir_name }}.conf dest="/etc/apache2/sites-available/{{ joomla_dir_name }}.conf"
+  template: src={{ joomla_dir_name }}.conf dest="/etc/apache2/sites-available/{{ joomla_dir_name }}.conf" owner=www-data group=www-data mode=0775
   tags: joomla
 
 - name: Enable VHOST
   command: a2ensite {{ joomla_dir_name }}.conf
-  notify: Reiniciar Apache2
+  notify: Restart Apache2
   tags: joomla
 
 - name: Disable VHOST default
   command: a2dissite 000-default.conf
-  notify: Reiniciar Apache2
+  notify: Restart Apache2
   tags: joomla

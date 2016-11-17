@@ -1,39 +1,47 @@
 ---
 # file: roles/database/tasks/main.yml
 
-- name: 1. Install Mysql
+- name: Install Mysql
   apt: name=mysql-server update_cache=yes state=latest
   tags: mysql
 
-- name: 2. Start Mysql
+- name: Start Mysql
   service: name=mysql state=started
   tags: mysql
 
-- name: 3. Install python-mysql dependencies
+- name: Copy the my.cnf file to mysql
+  template: src=my.cnf dest={{ mysql_conf_dir }}/my.cnf
+  notify: Restart mysql
+  tags: mysql
+
+- name: Install python-mysql dependencies
   apt: name=python-mysqldb state=installed
   tags: mysql
 
-- name: 4. Changing credencials user root
+- name: Changing credencials user root
   mysql_user: name='root' host=localhost login_user=root login_password=root check_implicit_admin=yes
+  notify: Restart mysql
   tags: mysql
 
-- name: 5. Create database joomla
+- name: Create database joomla
   mysql_db: name=joomla state=present
+  notify: Restart mysql
   tags: joomla
 
-- name: 6. Import templete joomla
+- name: Import templete joomla
   template: src="joomla.sql" dest="/tmp" owner=root group=root mode=0775
   tags: joomla
 
-- name: 7. Insert templete joomla.sql to mysql.
+- name: Insert templete joomla.sql to mysql.
   mysql_db: name=joomla state=import target="/tmp/joomla.sql"
-  tags: joomla
-
-- name: 8. Create user joomla to mysql
-  mysql_user: name='joomla' password='1t1l2016.' host='%' login_user=joomla login_password='1t1l2016.' check_implicit_admin=yes priv='joomla.*:ALL,GRANT'
-  tags: joomla
-
-- name: 9. Clean directory /tmp
-  file: path="/tmp/joomla.sql" state=absent
   notify: Restart mysql
+  tags: joomla
+
+- name: Create user joomla to mysql
+  mysql_user: name='joomla' password='1t1l2016.' host='%' login_user=joomla login_password='1t1l2016.' check_implicit_admin=yes priv='joomla.*:ALL,GRANT'
+  notify: Restart mysql
+  tags: joomla
+
+- name: Clean directory /tmp
+  file: path="/tmp/joomla.sql" state=absent
   tags: joomla

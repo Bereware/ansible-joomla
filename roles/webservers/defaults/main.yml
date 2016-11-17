@@ -8,7 +8,7 @@ joomla_version: "3.6.4"
 joomla_dist_url: "https://github.com/joomla/joomla-cms/releases/download/{{joomla_version}}/Joomla_{{joomla_version}}-Stable-Full_Package.zip"
 
 # Joomla host_db
-joomla_host_db: "192.168.119.135"
+joomla_host_db: "192.168.119.136"
 
 # Joomla dir name
 joomla_dir_name: "ansible-joomla"

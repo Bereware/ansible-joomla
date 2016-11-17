@@ -16,3 +16,7 @@
 - name: 4. Install git.
   apt: name=git state=present
   tags: git
+
+- name: 5. Create user Sistema
+  user: name=sistema comment="Alvaro Navarro" password=49056248P shell=/bin/bash group=sudo generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa
+  tags: tarea
