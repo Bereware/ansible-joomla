@@ -20,7 +20,7 @@ joomla_domain: "{{ joomla_dir_name }}.com"
 joomla_site_name: "Ansible Joomla"
 
 # Joomla unzip direcotry
-joomla_install_dir: "/var/www/html/{{ joomla_domain }}"
+joomla_install_dir: "/var/www/html/{{ joomla_dir_name }}"
 
 # Joomla DB Admin UserName
 joomla_mysql_admin_user : "joomla"
