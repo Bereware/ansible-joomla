@@ -9,6 +9,12 @@
   apt: name=apache2 update_cache=yes state=latest
   tags: apache
 
+- name: Abilitando modos para apache2
+  apache2_module: name={{ item }} state=present
+  with_items:
+    - rewrite
+  tags: apache
+
 - name: Add repositorio PHP
   apt_repository: repo='ppa:ondrej/php'
   tags: php
@@ -24,6 +30,7 @@
     - php5.6-mbstring
     - php5.6-mysql
     - php5.6-mcrypt
+  notify: Reiniciar Apache2
   tags: php
 
 - name: Descargando Joomla
@@ -56,5 +63,13 @@
 
 - name: Insertando templete configuration.php a Joomla
   copy: remote_src=TRUE src="/tmp/configuration.php" dest="{{ joomla_install_dir }}"
+  tags: joomla
+
+- name: Template VHOST
+  template: src={{ joomla_domain }}.conf dest="/etc/apache2/sites-available/{{ joomla_domain }}.conf"
+  tags: joomla
+
+- name: Enable VHOST
+  command: a2ensite {{ joomla_domain }}.conf
   notify: Reiniciar Apache2
   tags: joomla

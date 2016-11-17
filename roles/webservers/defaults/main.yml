@@ -11,13 +11,16 @@ joomla_dist_url: "https://github.com/joomla/joomla-cms/releases/download/{{jooml
 joomla_host_db: "192.168.119.135"
 
 # Joomla dir name
-joomla_dir_name: "ansible-joomla.com"
+joomla_dir_name: "ansible-joomla"
+
+# Joomla domain
+joomla_domain: "{{ joomla_dir_name }}.com"
 
 # Site name here
 joomla_site_name: "Ansible Joomla"
 
 # Joomla unzip direcotry
-joomla_install_dir: "/var/www/html/{{ joomla_dir_name }}"
+joomla_install_dir: "/var/www/html/{{ joomla_domain }}"
 
 # Joomla DB Admin UserName
 joomla_mysql_admin_user : "joomla"
@@ -38,4 +41,4 @@ joomla_site_title: "Alvaro Navarro Acosta | Ansible"
 joomla_site_secret: "mNS56Xjz4C0OLSIc"
 
 # Joomla Table prefix
-joomla_site_dbprefix: "r3846_"
+joomla_site_dbprefix: "joomla_"

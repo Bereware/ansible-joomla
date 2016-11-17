@@ -19,17 +19,21 @@
 
 - name: 5. Create database joomla
   mysql_db: name=joomla state=present
-  tags: mysql
+  tags: joomla
 
 - name: 6. Import templete joomla
   template: src="joomla.sql" dest="/tmp" owner=root group=root mode=0775
-  tags: mysql
+  tags: joomla
 
-- name: 7. Create user joomla to mysql
-  mysql_user: name='joomla' password='1t1l2016.' host='%' login_user=joomla login_password=joomla check_implicit_admin=yes priv='joomla.*:ALL,GRANT'
-  tags: mysql
-
-- name: 8. Insert templete joomla.sql to mysql.
+- name: 7. Insert templete joomla.sql to mysql.
   mysql_db: name=joomla state=import target="/tmp/joomla.sql"
+  tags: joomla
+
+- name: 8. Create user joomla to mysql
+  mysql_user: name='joomla' password='1t1l2016.' host='%' login_user=joomla login_password='1t1l2016.' check_implicit_admin=yes priv='joomla.*:ALL,GRANT'
+  tags: joomla
+
+- name: 9. Clean directory /tmp
+  file: path="/tmp/joomla.sql" state=absent
   notify: Restart mysql
-  tags: mysql
+  tags: joomla
