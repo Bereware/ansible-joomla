@@ -1,0 +1,41 @@
+---
+# file: roles/webserver/default/main.yml
+
+#Version Joomla
+joomla_version: "3.6.4"
+
+# Url download joomla distribution
+joomla_dist_url: "https://github.com/joomla/joomla-cms/releases/download/{{joomla_version}}/Joomla_{{joomla_version}}-Stable-Full_Package.zip"
+
+# Joomla host_db
+joomla_host_db: "192.168.119.135"
+
+# Joomla dir name
+joomla_dir_name: "ansible-joomla.com"
+
+# Site name here
+joomla_site_name: "Ansible Joomla"
+
+# Joomla unzip direcotry
+joomla_install_dir: "/var/www/html/{{ joomla_dir_name }}"
+
+# Joomla DB Admin UserName
+joomla_mysql_admin_user : "joomla"
+
+# Joomla DB Admin passwd
+joomla_mysql_admin_passwd: "1t1l2016."
+
+# Joomlad DB name
+joomla_mysql_db_name: "joomla"
+
+# Mail adress admin mail
+joomla_admin_mail: "anavaco@alu.upo.es"
+
+# Joomla Instance Title
+joomla_site_title: "Alvaro Navarro Acosta | Ansible"
+
+# Joomla SEcret token
+joomla_site_secret: "mNS56Xjz4C0OLSIc"
+
+# Joomla Table prefix
+joomla_site_dbprefix: "r3846_"

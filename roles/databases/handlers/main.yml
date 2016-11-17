@@ -1,5 +1,5 @@
 ---
-# file: roles/webserver/handlers/main.yml
+# file: roles/databases/handlers/main.yml
 
-- name: Reiniciar Mysql
+- name: Restart mysql
   service: name=mysql state=restarted

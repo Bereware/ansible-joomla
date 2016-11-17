@@ -27,27 +27,27 @@
   tags: php
 
 - name: Descargando Joomla
-  get_url: url="https://downloads.joomla.org/cms/joomla3/3-6-4/joomla_3-6-4-stable-full_package-zip?format=zip" dest="/tmp"
+  get_url: url={{ joomla_dist_url }} dest="/tmp"
   tags: joomla
 
 - name: Creando directorio Joomla
-  file: path=/var/www/html/joomla state=directory owner=www-data group=www-data mode=0775
+  file: path={{ joomla_install_dir }} state=directory owner=www-data group=www-data mode=0775
   tags: joomla
 
 - name: Copiando Joomla a servidor Apache
-  copy: remote_src=TRUE src="/tmp/Joomla_3.6.4-Stable-Full_Package.zip" dest="/var/www/html/joomla/Joomla.zip"
+  copy: remote_src=TRUE src="/tmp/Joomla_{{ joomla_version }}-Stable-Full_Package.zip" dest="{{ joomla_install_dir }}/Joomla.zip"
   tags: joomla
 
 - name: Limpiando carpeta /tmp
-  file: path="/tmp/Joomla_3.6.4-Stable-Full_Package.zip" state=absent
+  file: path="/tmp/Joomla_{{ joomla_version }}-Stable-Full_Package.zip" state=absent
   tags: joomla
 
 - name: Descomprimiendo Joomla
-  unarchive: copy=no src="/var/www/html/joomla/Joomla.zip" dest="/var/www/html/joomla/" owner=www-data group=www-data mode=0775
+  unarchive: copy=no src="{{ joomla_install_dir }}/Joomla.zip" dest="{{ joomla_install_dir }}" owner=www-data group=www-data mode=0775
   tags: joomla
 
 - name: Eliminar direcotrio Instalacion Joomla
-  file: path="/var/www/html/joomla/installation" state=absent
+  file: path="{{ joomla_install_dir }}/installation" state=absent
   tags: joomla
 
 - name: Importando templete configuration.php a nodo
@@ -55,6 +55,6 @@
   tags: joomla
 
 - name: Insertando templete configuration.php a Joomla
-  copy: remote_src=TRUE src="/tmp/configuration.php" dest="/var/www/html/joomla"
+  copy: remote_src=TRUE src="/tmp/configuration.php" dest="{{ joomla_install_dir }}"
   notify: Reiniciar Apache2
   tags: joomla

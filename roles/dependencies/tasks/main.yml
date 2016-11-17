@@ -1,13 +1,18 @@
 ---
 # file: roles/dependencies/tasks/main.yml
 
-- name: Actualizando sistema
+- name: 1. Update system
   apt: update_cache=yes
+  tags: update
 
-- name: Instalando unzip.
+- name: 2. Update all packages to the latest version
+  apt: upgrade=dist
+  tags: update
+
+- name: 3. Install unzip
   apt: name=unzip state=present
   tags: dependency
 
-- name: Instalando git.
+- name: 4. Install git.
   apt: name=git state=present
   tags: git

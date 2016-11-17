@@ -1,35 +1,35 @@
 ---
 # file: roles/database/tasks/main.yml
 
-- name: Instalando Mysql
+- name: 1. Install Mysql
   apt: name=mysql-server update_cache=yes state=latest
   tags: mysql
 
-- name: Levantando Mysql
+- name: 2. Start Mysql
   service: name=mysql state=started
   tags: mysql
 
-- name: Instalando python mysql dependencias
+- name: 3. Install python-mysql dependencies
   apt: name=python-mysqldb state=installed
   tags: mysql
 
-- name: Cambiando credenciales user root
+- name: 4. Changing credencials user root
   mysql_user: name='root' host=localhost login_user=root login_password=root check_implicit_admin=yes
   tags: mysql
 
-- name: Creando Base de Datos joomla
+- name: 5. Create database joomla
   mysql_db: name=joomla state=present
   tags: mysql
 
-- name: Importando templete joomla.
+- name: 6. Import templete joomla
   template: src="joomla.sql" dest="/tmp" owner=root group=root mode=0775
   tags: mysql
 
-- name: Creando usuario Joomla
-  mysql_user: name='joomla' password=joomla host=localhost login_user=joomla login_password=joomla check_implicit_admin=yes priv=joomla.*:ALL,GRANT
+- name: 7. Create user joomla to mysql
+  mysql_user: name='joomla' password='1t1l2016.' host=localhost login_user=joomla login_password=joomla check_implicit_admin=yes priv=joomla.*TOansible@192.168.119.135:ALL,GRANT
   tags: mysql
 
-- name: Insertando templete joomla a mysql.
+- name: 8. Insert templete joomla.sql to mysql.
   mysql_db: name=joomla state=import target="/tmp/joomla.sql"
-  notify: Reiniciar Mysql
+  notify: Restart mysql
   tags: mysql

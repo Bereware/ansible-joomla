@@ -4,7 +4,7 @@ class JConfig {
 	public $offline_message = 'Este sitio está cerrado por tareas de mantenimiento.<br />Por favor, inténtelo nuevamente más tarde.';
 	public $display_offline_message = '1';
 	public $offline_image = '';
-	public $sitename = 'Alvaro Navarro Acosta | Ansible';
+	public $sitename = '{{ joomla_site_title }}';
 	public $editor = 'tinymce';
 	public $captcha = '0';
 	public $list_limit = '20';
@@ -12,17 +12,17 @@ class JConfig {
 	public $debug = '0';
 	public $debug_lang = '0';
 	public $dbtype = 'mysqli';
-	public $host = '192.168.119.135';
-	public $user = 'joomla';
-	public $password = 'joomla';
-	public $db = 'joomla';
-	public $dbprefix = 'joomla_';
+	public $host = '{{ joomla_host_db }}';
+	public $user = '{{ joomla_mysql_admin_user }}';
+	public $password = '{{ joomla_mysql_admin_passwd }}';
+	public $db = '{{ joomla_mysql_db_name }}';
+	public $dbprefix = '{{ joomla_site_dbprefix }}';
 	public $live_site = '';
-	public $secret = 'mNS56Xjz4C0OLSIc';
+	public $secret = '{{ joomla_site_secret }}';
 	public $gzip = '0';
 	public $error_reporting = 'default';
 	public $helpurl = 'https://help.joomla.org/proxy/index.php?keyref=Help{major}{minor}:{keyref}';
-	public $ftp_host = '127.0.0.1';
+	public $ftp_host = '{{ joomla_host_db }}';
 	public $ftp_port = '21';
 	public $ftp_user = '';
 	public $ftp_pass = '';
@@ -31,8 +31,8 @@ class JConfig {
 	public $offset = 'UTC';
 	public $mailonline = '1';
 	public $mailer = 'mail';
-	public $mailfrom = 'alvaronavarro@outlook.com';
-	public $fromname = 'Alvaro Navarro Acosta | Ansible';
+	public $mailfrom = '{{ joomla_admin_mail }}';
+	public $fromname = '{{ joomla_site_title }}';
 	public $sendmail = '/usr/sbin/sendmail';
 	public $smtpauth = '0';
 	public $smtpuser = '';
@@ -56,8 +56,8 @@ class JConfig {
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
 	public $feed_email = 'none';
-	public $log_path = '/var/www/html/joomla/administrator/logs';
-	public $tmp_path = '/var/www/html/joomla/tmp';
+	public $log_path = '{{ joomla_install_dir }}/administrator/logs';
+	public $tmp_path = '{{ joomla_install_dir }}/tmp';
 	public $lifetime = '15';
 	public $session_handler = 'database';
 }
