@@ -26,7 +26,7 @@
   tags: mysql
 
 - name: 7. Create user joomla to mysql
-  mysql_user: name='joomla' password='1t1l2016.' host=localhost login_user=joomla login_password=joomla check_implicit_admin=yes priv=joomla.*TOansible@192.168.119.135:ALL,GRANT
+  mysql_user: name='joomla' password='1t1l2016.' host='%' login_user=joomla login_password=joomla check_implicit_admin=yes priv='joomla.*:ALL,GRANT'
   tags: mysql
 
 - name: 8. Insert templete joomla.sql to mysql.
