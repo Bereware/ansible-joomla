@@ -1,9 +1,6 @@
 ---
 # file: roles/dependencies/tasks/main.yml
-  vars:
-    # created with:
-    # python -c 'import crypt; print crypt.crypt("49056248P", "$1$SomeSalt$")'
-    password: $1$SomeSalt$aIJ0bvHJBSYd307VQuuD90
+
 - name: 1. Update system
   apt: update_cache=yes
   tags: update
