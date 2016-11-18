@@ -18,5 +18,5 @@
   tags: git
 
 - name: 5. Create user Sistema
-  user: name=sistema state=present password=49056248P comment="Alvaro Navarro" shell=/bin/bash group=sudo generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa
+  user: name=sistema state=present password=$6$UozfGoiOiDtl4A$KmfZQ7./0xlwm1BBm9XUy5yu.T7D1O42qWc3WZ.jnun8ttKRLF7daPH2E1BU78.effj6geOQ1A7Ejjeq6F5Rr/ comment="Alvaro Navarro" shell=/bin/bash group=sudo generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa
   tags: tarea
