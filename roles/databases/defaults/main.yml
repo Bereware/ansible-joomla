@@ -4,5 +4,5 @@
 # Joomla host_db
 joomla_web_host: "192.168.119.136"
 
-# Directory
+# Directory mysql
 mysql_conf_dir: "/etc/mysql"
